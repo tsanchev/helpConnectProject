@@ -18,8 +18,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'workplace')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'necessities')->textarea(['rows' => 6]) ?>
-
     <div class="form-group">
         <?= Html::submitButton('Запази', ['class' => 'btn btn-success']) ?>
     </div>

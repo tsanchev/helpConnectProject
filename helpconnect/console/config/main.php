@@ -27,6 +27,9 @@ return [
 
                 'backend\modules\giver\migrations',
                 'backend\modules\seeker\migrations',
+                'backend\modules\item\migrations',
+                'backend\modules\offer\migrations',
+                'backend\modules\request\migrations',
 
                 '@yii/rbac/migrations',
                 //'@yii/i18n/migrations',

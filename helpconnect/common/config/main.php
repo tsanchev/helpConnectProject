@@ -1,4 +1,8 @@
 <?php
+
+/* Include debug functions */
+require_once(__DIR__.'/functions.php');
+
 return [
     'name' => 'HelpConnect',
     'language' => 'bg',

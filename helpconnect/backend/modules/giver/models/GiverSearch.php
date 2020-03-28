@@ -18,7 +18,7 @@ class GiverSearch extends Giver
     {
         return [
             [['giver_id', 'user_id'], 'integer'],
-            [['name', 'company', 'phone', 'services'], 'safe'],
+            [['name', 'company', 'phone', ], 'safe'],
         ];
     }
 
@@ -64,8 +64,7 @@ class GiverSearch extends Giver
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'company', $this->company])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'services', $this->services]);
+            ->andFilterWhere(['like', 'phone', $this->phone]);
 
         return $dataProvider;
     }

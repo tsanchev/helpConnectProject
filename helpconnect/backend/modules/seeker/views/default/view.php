@@ -34,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'phone',
             'workplace',
-            'necessities:ntext',
         ],
     ]) ?>
 

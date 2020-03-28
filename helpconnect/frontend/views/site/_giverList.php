@@ -19,7 +19,6 @@ use yii\grid\GridView;
         'name',
         'company',
         'phone',
-        'services:ntext',
     ],
 ]); ?>
 

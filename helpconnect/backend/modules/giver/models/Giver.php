@@ -14,7 +14,6 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string|null $company
  * @property string $phone
- * @property string $services
  *
  * @property User $user
  */
@@ -34,9 +33,8 @@ class Giver extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'name', 'phone', 'services'], 'required'],
+            [['user_id', 'name', 'phone',], 'required'],
             [['user_id'], 'integer'],
-            [['services'], 'string'],
             [['name', 'company', 'phone'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -53,7 +51,6 @@ class Giver extends ActiveRecord
             'name' => 'Име',
             'company' => 'Фирма',
             'phone' => 'Телефон',
-            'services' => 'Предлагани услуги',
         ];
     }
 

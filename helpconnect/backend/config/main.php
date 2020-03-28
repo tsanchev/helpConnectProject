@@ -14,6 +14,9 @@ return [
     'modules' => [
         'giver' => 'backend\modules\giver\Giver',
         'seeker' => 'backend\modules\seeker\Seeker',
+        'item' => 'backend\modules\item\Item',
+        'offer' => 'backend\modules\offer\Offer',
+        'request' => 'backend\modules\request\Request',
     ],
     'components' => [
         'request' => [

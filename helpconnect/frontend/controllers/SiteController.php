@@ -3,12 +3,15 @@ namespace frontend\controllers;
 
 use backend\modules\giver\models\Giver;
 use backend\modules\giver\models\GiverSearch;
+use backend\modules\offer\models\Offer;
+use backend\modules\request\models\Request;
 use backend\modules\seeker\models\Seeker;
 use backend\modules\seeker\models\SeekerSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -103,23 +106,33 @@ class SiteController extends Controller
                 $seeker->phone = $giver->phone;
             }
         }
-
         if ($seeker->load(Yii::$app->request->post()) && $seeker->save()) {
             Yii::$app->session->addFlash('success', "Записът е успешен!");
             $this->refresh();
         }
 
-        $giverSearch = null;
-        $giverDataProvider = null;
+        $request = new Request();
+        $request->seeker_id = $seeker->seeker_id;
+        if ($request->load(Yii::$app->request->post()) && $request->save()) {
+            Yii::$app->session->addFlash('success', "Записът е успешен!");
+            $this->refresh();
+        }
+
+        $seekerRequestsDataProvider = null;
         if( $seeker->seeker_id != 0) {
-            $giverSearch = new GiverSearch();
-            $giverDataProvider = $giverSearch->search(Yii::$app->request->queryParams);
+            $seekerRequestsDataProvider = new ActiveDataProvider([
+                'query' => Request::find()->andWhere(['seeker_id' => $seeker->seeker_id]),
+                'sort' => [
+                    'attributes' => ['request_id',],
+                    'defaultOrder' => ['request_id' => SORT_DESC,],
+                ]
+            ]);
         }
 
         return $this->render('seekHelp', [
             'seeker' => $seeker,
-            'giverSearch' => $giverSearch,
-            'giverDataProvider' => $giverDataProvider,
+            'request' => $request,
+            'seekerRequestsDataProvider' => $seekerRequestsDataProvider,
         ]);
     }
 
@@ -145,24 +158,34 @@ class SiteController extends Controller
                 $giver->phone = $seeker->phone;
             }
         }
-
         if ($giver->load(Yii::$app->request->post()) && $giver->save()) {
             Yii::$app->session->addFlash('success', "Записът е успешен!");
             $this->refresh();
         }
 
-        $seekerSearch = null;
-        $seekerDataProvider = null;
+        $offer = new Offer();
+        $offer->giver_id = $giver->giver_id;
+        if ($offer->load(Yii::$app->request->post()) && $offer->save()) {
+            Yii::$app->session->addFlash('success', "Записът е успешен!");
+            $this->refresh();
+        }
+
+        $giverOffersDataProvider = null;
         if( $giver->giver_id != 0) {
-            $seekerSearch = new SeekerSearch();
-            $seekerDataProvider = $seekerSearch->search(Yii::$app->request->queryParams);
+            $giverOffersDataProvider = new ActiveDataProvider([
+                'query' => Offer::find()->andWhere(['giver_id' => $giver->giver_id]),
+                'sort' => [
+                    'attributes' => ['offer_id',],
+                    'defaultOrder' => ['offer_id' => SORT_DESC,],
+                ]
+            ]);
         }
 
 
         return $this->render('giveHelp', [
             'giver' => $giver,
-            'seekerSearch' => $seekerSearch,
-            'seekerDataProvider' => $seekerDataProvider,
+            'offer' => $offer,
+            'giverOffersDataProvider' => $giverOffersDataProvider,
         ]);
     }
 

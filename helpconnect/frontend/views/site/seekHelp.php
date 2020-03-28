@@ -2,8 +2,8 @@
 
 /* @var $this yii\web\View */
 /* @var $seeker backend\modules\seeker\models\Seeker */
-/* @var $giverSearch backend\modules\giver\models\GiverSearch */
-/* @var $giverDataProvider yii\data\ActiveDataProvider */
+/* @var $seekerRequestsDataProvider \yii\data\ActiveDataProvider */
+/* @var $request \backend\modules\request\models\Request */
 
 $this->title = 'Потърси помощ';
 
@@ -33,17 +33,21 @@ use yii\widgets\DetailView; ?>
                 'name',
                 'phone',
                 'workplace',
-                'necessities:ntext',
             ],
         ]) ?>
         <br>
 
-        <p><b>Списък предлагащи помощ</b></p>
+        <p><b>Добави запитване</b></p>
 
-        <?= $this->render('_giverList', [
-            'giverSearch' => $giverSearch,
-            'giverDataProvider' => $giverDataProvider,
+        <?= $this->render('@backend/modules/request/views/default/_form', [
+            'model' => $request,
         ]) ?>
+    
+        <p><b>Моите запитвания</b></p>
+        <?= $this->render('_requestList', [
+            'seekerRequestsDataProvider' => $seekerRequestsDataProvider,
+        ]) ?>
+
 
     <?php endif; ?>
 

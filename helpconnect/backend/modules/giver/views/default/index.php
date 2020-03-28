@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'company',
             'phone',
-            //'services:ntext',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

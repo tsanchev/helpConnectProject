@@ -2,12 +2,11 @@
 
 /* @var $this yii\web\View */
 /* @var $giver \backend\modules\giver\models\Giver */
-/* @var $seekerSearch backend\modules\seeker\models\SeekerSearch */
-/* @var $seekerDataProvider yii\data\ActiveDataProvider */
+/* @var $giverOffersDataProvider \yii\data\ActiveDataProvider */
+/* @var $offer \backend\modules\offer\models\Offer */
 
 $this->title = 'Предложи помощ';
 
-use yii\helpers\Html;
 use yii\widgets\DetailView; ?>
 <div class="site-give-help">
 
@@ -33,17 +32,21 @@ use yii\widgets\DetailView; ?>
                 'name',
                 'phone',
                 'company',
-                'services:ntext',
             ],
         ]) ?>
         <br>
 
-        <p><b>Списък търсещи помощ</b></p>
+        <p><b>Добави предложение</b></p>
 
-        <?= $this->render('_seekerList', [
-            'seekerSearch' => $seekerSearch,
-            'seekerDataProvider' => $seekerDataProvider,
+        <?= $this->render('@backend/modules/offer/views/default/_form', [
+            'model' => $offer,
         ]) ?>
+
+        <p><b>Моите предложения</b></p>
+        <?= $this->render('_offerList', [
+            'giverOffersDataProvider' => $giverOffersDataProvider,
+        ]) ?>
+
 
     <?php endif; ?>
 

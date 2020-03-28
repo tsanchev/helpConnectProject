@@ -14,7 +14,6 @@ use yii\db\ActiveRecord;
  * @property string $name
  * @property string $phone
  * @property string $workplace
- * @property string $necessities
  *
  * @property User $user
  */
@@ -36,7 +35,6 @@ class Seeker extends ActiveRecord
         return [
             [['user_id', 'name', 'phone', 'workplace'], 'required'],
             [['user_id'], 'integer'],
-            [['necessities'], 'string'],
             [['name', 'phone', 'workplace'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -53,7 +51,6 @@ class Seeker extends ActiveRecord
             'name' => 'Име',
             'phone' => 'Телефон',
             'workplace' => 'Месторабота',
-            'necessities' => 'Необходимост от'
         ];
     }
 

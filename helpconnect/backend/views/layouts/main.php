@@ -46,6 +46,15 @@ AppAsset::register($this);
     if (Yii::$app->user->can('seeker') || Yii::$app->user->can('adminBackend')) {
         $menuItems[] = ['label' => Yii::t('app', 'Търси Помощ'), 'url' => ['/seeker']];
     }
+    if (Yii::$app->user->can('offer') || Yii::$app->user->can('adminBackend')) {
+        $menuItems[] = ['label' => Yii::t('app', 'Предложения'), 'url' => ['/offer']];
+    }
+    if (Yii::$app->user->can('request') || Yii::$app->user->can('adminBackend')) {
+        $menuItems[] = ['label' => Yii::t('app', 'Запитвания'), 'url' => ['/request']];
+    }
+    if (Yii::$app->user->can('item') || Yii::$app->user->can('adminBackend')) {
+        $menuItems[] = ['label' => Yii::t('app', 'Артикули'), 'url' => ['/item']];
+    }
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
